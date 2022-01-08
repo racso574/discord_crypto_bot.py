@@ -1,5 +1,7 @@
 # discord_crypto_bot.py
+
 This project is a simple Discord bot written in Python that keeps you up to date with the price of bitcoin and other cryptocurrencies.
+
 ---
 
 ## Setup process
