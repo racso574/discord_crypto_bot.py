@@ -3,11 +3,10 @@ import discord
 from dotenv import load_dotenv
 from discord.ext import tasks, commands
 from openpyxl import load_workbook
-from random import randint, choice
 import urllib.request
 import re
 import time
-from time import sleep
+
 
 
 load_dotenv()
@@ -92,12 +91,14 @@ async def mamial():
     edit = xl['Sheet1']
     b1 = str(edit['b1'].value)
     b2 = str(edit['b2'].value)
-    if cdata1[0] <= os.getenv('minp') and '1' in b1:
+    a1 = str(edit['a1'].value)
+    a2 = str(edit['a2'].value)
+    if cdata1[0] <= a1[5:] and '1' in b1:
         await channel.send(myid)
         await channel.send(embed=embed)
         edit['b1'].value = 'nmp'
         xl.save('db.xlsx')
-    elif cdata1[0] >= os.getenv('maxp') and '1' in b2:
+    elif cdata1[0] >= a2[5:] and '1' in b2:
         await channel.send(myid)
         await channel.send(embed=embed)
         edit['b2'].value = 'nmp'
@@ -105,7 +106,7 @@ async def mamial():
 
 
 @client.command()
-async def reset(ctx):
+async def rs(ctx):
     xl = load_workbook('db.xlsx')
     edit = xl['Sheet1']
     edit['b1'].value = '1'
@@ -113,7 +114,23 @@ async def reset(ctx):
     xl.save('db.xlsx')
     await ctx.send('ok')
 
+@client.command()
+async def nmin(ctx):
+    xl = load_workbook('db.xlsx')
+    edit = xl['Sheet1']
+    edit['a1'].value = ctx.message.content
+    xl.save('db.xlsx')
+    await ctx.send('nmin ok')
+
+@client.command()
+async def nmax(ctx):
+    xl = load_workbook('db.xlsx')
+    edit = xl['Sheet1']
+    edit['a2'].value = ctx.message.content
+    xl.save('db.xlsx')
+    await ctx.send('nmax ok')
+
 
 client.run(TOKEN)
 
-# # dcb > v1.0 racso574
+# # dcb > v1.1 racso574
