@@ -111,8 +111,10 @@ async def rs(ctx):
     edit = xl['Sheet1']
     edit['b1'].value = '1'
     edit['b2'].value = '1'
+    a1 = str(edit['a1'].value)
+    a2 = str(edit['a2'].value)
     xl.save('db.xlsx')
-    await ctx.send('ok')
+    await ctx.send('ok '+ a1 + a2)
 
 @client.command()
 async def nmin(ctx):
@@ -121,7 +123,7 @@ async def nmin(ctx):
     edit['a1'].value = ctx.message.content
     a1 = str(edit['a1'].value)
     xl.save('db.xlsx')
-    await ctx.send('nmin ok', a1)
+    await ctx.send('nmin ok ' + a1)
 
 @client.command()
 async def nmax(ctx):
@@ -130,9 +132,10 @@ async def nmax(ctx):
     edit['a2'].value = ctx.message.content
     a2 = str(edit['a2'].value)
     xl.save('db.xlsx')
-    await ctx.send('nmax ok', a2)
+    await ctx.send('nmax ok ' + a2)
+
 
 
 client.run(TOKEN)
 
-# # dcb > v1.1 racso574
+# # dcb > v1.2 racso574
