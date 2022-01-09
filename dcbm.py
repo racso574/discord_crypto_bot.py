@@ -79,7 +79,7 @@ async def panvideoalert():
 #allowed_mentions = discord.AllowedMentions.all()
 #content="@everyone",allowed_mentions=allowed_mentions,
 
-@tasks.loop(seconds=5)
+@tasks.loop(seconds=60)
 async def mamial():
     webdata1 = urllib.request.urlopen('https://coinmarketcap.com/currencies' + os.getenv('c1'))
     cdata1 = re.findall(r"<span>\$(\S{2})", webdata1.read().decode())
@@ -119,16 +119,18 @@ async def nmin(ctx):
     xl = load_workbook('db.xlsx')
     edit = xl['Sheet1']
     edit['a1'].value = ctx.message.content
+    a1 = str(edit['a1'].value)
     xl.save('db.xlsx')
-    await ctx.send('nmin ok')
+    await ctx.send('nmin ok', a1)
 
 @client.command()
 async def nmax(ctx):
     xl = load_workbook('db.xlsx')
     edit = xl['Sheet1']
     edit['a2'].value = ctx.message.content
+    a2 = str(edit['a2'].value)
     xl.save('db.xlsx')
-    await ctx.send('nmax ok')
+    await ctx.send('nmax ok', a2)
 
 
 client.run(TOKEN)
