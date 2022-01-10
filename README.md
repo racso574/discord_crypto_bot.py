@@ -32,3 +32,6 @@ channel = client.get_channel(id=927667593582945)
 ```
 
 * and lastly install req.txt
+```console
+pi@racso574:~$ pip install -r req.txt
+```
