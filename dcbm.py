@@ -6,6 +6,8 @@ from openpyxl import load_workbook
 import urllib.request
 import re
 import time
+from datetime import date
+
 
 
 
@@ -21,7 +23,7 @@ client.remove_command('help')
 @client.event
 async def on_ready():
     print(f'{client.user} uwu')
-    panvideoalert.start()
+    cl.start()
     mamial.start()
 
 @client.command()
@@ -47,7 +49,7 @@ async def cp(ctx):
 
 
 @tasks.loop(seconds=60)
-async def panvideoalert():
+async def cl():
     webdatabtc = urllib.request.urlopen('https://coinmarketcap.com/currencies' + os.getenv('c1'))
     cdatabtc = re.findall(r"<span>\$(\S{9})", webdatabtc.read().decode())
     webdataeth = urllib.request.urlopen('https://coinmarketcap.com/currencies' + os.getenv('c2'))
@@ -122,6 +124,7 @@ async def nmin(ctx):
     edit = xl['Sheet1']
     edit['a1'].value = ctx.message.content
     a1 = str(edit['a1'].value)
+    edit['b1'].value = '1'
     xl.save('db.xlsx')
     await ctx.send('nmin ok ' + a1)
 
@@ -131,11 +134,20 @@ async def nmax(ctx):
     edit = xl['Sheet1']
     edit['a2'].value = ctx.message.content
     a2 = str(edit['a2'].value)
+    edit['b2'].value = '1'
     xl.save('db.xlsx')
     await ctx.send('nmax ok ' + a2)
+
+@client.command()
+async def fear(ctx):
+    today = date.today()
+    y = today.strftime("%Y")
+    m = today.strftime("%m")
+    d = today.strftime("%d")
+    await ctx.send('https://alternative.me/images/fng/crypto-fear-and-greed-index-' + y + '-' + m[1:] + '-' + d + '.png')
 
 
 
 client.run(TOKEN)
 
-# # dcb > v1.2 racso574
+# # dcb > v1.3 racso574
